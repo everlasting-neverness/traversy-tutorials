@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>AJAX 2 - Local JSON</title>
+</head>
+<body>
+
+  <button id="button1">Get User</button>
+  <button id="button2">Get Users</button>
+  <br><br>
+  <h3>User</h3>
+  <div id="user"></div>
+  <h3>Users</h3>
+  <div id="users"></div>
+
+  <script>
+function loadUser() {
+  let xhr = new XMLHttpRequest();
+  xhr.open("GET", "user.json");
+  xhr.onload = () => {
+    if (xhr.status === 200) {
+      document.getElementById("user").innerHTML = JSON.parse(xhr.responseText).name + JSON.parse(xhr.responseText).id + JSON.parse(xhr.responseText).email;
+    }
+  };
+  xhr.send();
+}
+
+function loadUsers() {
+  let xhr = new XMLHttpRequest();
+  xhr.open("GET", "users.json");
+  xhr.onload = () => {
+    if (xhr.status === 200) {
+      let res = JSON.parse(xhr.responseText);
+      let output = '';
+      for (let i in res) {
+        output += `<p>${res[i].name} - ${res[i].id} - ${res[i].email}</p>`
+      }
+      document.getElementById('users').innerHTML = output;
+  }
+}
+  xhr.send();
+}
+
+document.getElementById("button1").addEventListener("click", loadUser);
+document.getElementById("button2").addEventListener("click", loadUsers);
+</script>
+</body>
+</html>

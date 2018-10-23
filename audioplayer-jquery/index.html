@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Player</title>
+</head>
+<body>
+
+  <div id="container">
+    <div id="audio-image">
+      <img class="cover">
+    </div>
+    <div id="audio-player">
+      <div id="audio-info">
+        <span class="artist"></span> - <span class="title"></span>
+      </div>
+      <input type="range" min="0" max="10" value="5" id="volume">
+      <br>
+      <div id="audio-buttons">
+        <button id="prev"></button>
+        <button id="play"></button>
+        <button id="pause"></button>
+        <button id="stop"></button>
+        <button id="next"></button>
+      </div>
+      <div class="clearfix"></div>
+      <div id="tracker">
+        <div id="progressbar">
+          <span id="progress"></span>
+        </div>
+        <span id="duration"></span>
+      </div>
+      <div class="clearfix"></div>
+      <ul id="playlist">
+        <li data-song="02_mr_big_wake_up_myzuka.mp3" data-artist="Mr Big" data-cover='images/covers/cover1.jpg'>Wake Up.mp3</li>
+        <li data-song="02-i_forget_to_breathe.mp3" data-artist="Mr Big" data-cover='images/covers/cover1.jpg'>I Forget to Breath.mp3</li>
+        <li data-song="05_mr_big_mary_goes_round_myzuka.mp3" data-artist="Mr Big" data-cover='images/covers/cover1.jpg'>Mary Goes Round.mp3</li>
+        <li data-song="11-black_gives_way_to_blue.mp3" data-artist="Alice in Chains" data-cover='images/covers/cover1.jpg'>Black Gives Way to Blue.mp3</li>
+      </ul>
+    </div>
+
+  </div>
+
+
+  <script src="js/jquery.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

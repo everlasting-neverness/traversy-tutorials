@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <title>Jquery - AJAX</title>
+</head>
+<body>
+  <h1>Jquery - AJAX</h1>
+
+  <div id="container">
+    <div id="result"></div>
+    <ul id="users"></ul>
+    <form id="postForm" action="http://jsonplaceholder.typicode.com/posts">
+      <input type="text" id="title">
+      <textarea name="" id="body" cols="30" rows="10"></textarea>
+      <button>Submit</button>
+    </form>
+  </div>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      // $('#result').load('test.html', function(responseTxt, statusTxt, xhr) {
+      //   console.log(responseTxt, "resTxt");
+      //   console.log(statusTxt, "statTxt");
+      //   console.log(xhr, "xhr");
+      // });
+      $.get('test.html', function(data) {
+        $('#result').html(data);
+      })
+
+      // $.getJSON('users.json', function(data) {
+      //   $.each(data, function(i, user) {
+      //     $('ul#users').append(`<li>${user.title}</li>`)
+      //   })
+      // })
+
+      // $.ajax({
+      //   method: "GET",
+      //   url: 'http://jsonplaceholder.typicode.com/posts',
+      //   dataType: 'JSON'
+      // }).done(function(data) {
+      //   $.map(data, function(post, i) {
+      //     $('#result').append(`<h3>${post.title}</h3><p>${post.body}</p>`);
+      //   })
+      // })
+      $('#postForm').submit(function(e) {
+        e.preventDefault();
+        var title = $('#title').val();
+        var body = $('#body').val();
+        var url = $(this).attr('action');
+
+        $.post(url, {
+          title: title,
+          body: body,
+        }).done(data => {
+          console.log('savaed!');
+          console.log(data);
+        })
+      })
+    })
+
+
+  </script>
+</body>
+</html>

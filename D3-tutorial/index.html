@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <style>
+    /* .big {
+      font-weight: bold;
+      font-size: 30px;
+    } */
+
+    /* #chart {
+      width: 400px;
+      overflow-x: scroll;
+    } */
+
+    /* rect:hover {
+      fill: red!important;
+    } */
+  </style>
+  <title>D3 Tutorial</title>
+</head>
+<body>
+  <div class="cont">
+    <!-- <form name="f">
+      <label for="text">Text</label>
+      <input type="text" id="text">
+      <br>
+      <label for="pass">Pass</label>
+      <input type="password" id="pass" required>
+      <br>
+      <label for="validat">Validat</label>
+      <input type="password" id="validat" required>
+      <button>Subm</button>
+    </form>
+  </div>
+
+  <p>My name is <span class="name"></span></p>
+
+  <ul class="item">
+    <li>This is an item</li>
+    <li>This is an item</li>
+    <li>This is an item</li>
+    <li>This is an item</li>
+    <li>This is an item</li>
+    <li>This is an item</li>
+  </ul> -->
+  <!-- <h1>Top Smartphones</h1>
+  <ul class="items">
+    <li>iPhone 6</li>
+    <li>Galaxy S6</li>
+    <li>LG G3</li>
+    <li>Widows Phone</li>
+    <li>HTC One</li>
+  </ul> -->
+
+  <!-- <h1>SVG Shapes</h1> -->
+  <!-- <svg width="400" height="400" style="background: #f4f4f4;">
+    <rect width="300" height="300" style="fill: rgb(255, 0, 0); stroke: rgb(0, 0, 0); stroke-width: 1;" x='50' y='50'></rect>
+  </svg>
+  <svg width="400" height="400" style="background: #f4f4f4;">
+    <circle  cx='150' cy='150' r="50" stroke="black" stroke-width="1" fill="yellow"></rect>
+  </svg> -->
+
+  <!-- Putting an old script here to get things work -->
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+
+  <div id="chart">
+    <h1>Chart</h1>
+  </div>
+
+
+  <script>
+
+    // SOME STARTING STYLING
+    // d3.selectAll('li').style('color', 'red');
+    // d3.select('li').style('color', 'blue');
+    // d3.select('li:nth-child(2n)').style('color', 'yellow')
+    // .html('Yellow li item')
+    // .classed('big', true);
+    // d3.select('.item').style('background', '#eee');
+    //
+    // var numArray = [12, 20, 33, 40, 55, 67, 89, 90];
+    //
+    // let  li = d3.select('.item').selectAll(' li')
+    //   .data(numArray)
+    //   .text(d => {
+    //     return `This is item number ${d}`;
+    //   })
+    //
+    // li.enter().append('li').text(d => {
+    //   return `This is item number ${d}`;
+    // })
+    //
+    // li.exit().remove();
+    //
+    // let name = "John Doe";
+    //
+    // d3.select('.name').text(name);
+    // d3.selectAll('.item li')
+    //   .data(numArray)
+    //   .style('font-size', d => {
+    //     return d + 'px';
+    //   })
+    //   .style('border-top', '2px solid black');
+
+    // STARTING WORK WITH CHARTS
+    // var styles = [
+    //   {
+    //     'background': 'red',
+    //     'color': 'white',
+    //     'width': '35'
+    //   },
+    //   {
+    //     'background': 'yellow',
+    //     'color': 'black',
+    //     'width': '25'
+    //   },
+    //   {
+    //     'background': 'green',
+    //     'color': 'white',
+    //     'width': '20'
+    //   },
+    //   {
+    //     'background': 'black',
+    //     'color': 'white',
+    //     'width': '10'
+    //   },
+    //   {
+    //     'background': 'orange',
+    //     'color': 'white',
+    //     'width': '10'
+    //   },
+    // ];
+    //
+    // var li = d3.selectAll('.items li').data(styles);
+    // li.style('font-size', '18px');
+    // li.style('padding', '6px');
+    // li.style('margin', '4px');
+    // li.style('list-style', 'none');
+    // li.style('background', d => {
+    //     return d.background;
+    //   });
+    // li.style('color', d => {
+    //     return d.color;
+    //   });
+    // li.style('width', d => {
+    //       return d.width + '%';
+    //   });
+
+  // STARTING WORK WITH SVG
+  // d3.select('body')
+  //   .append('svg')
+  //     .attr('width', 400)
+  //     .attr('height', 400)
+  //     .style('background', '#f4f4f4')
+  //   .append('rect')
+  //     .attr('width', 300)
+  //     .attr('height', 300)
+  //     .attr('x', 50)
+  //     .attr('y', 50)
+  //     .style('fill', 'red')
+  //     .style('stroke', 'black')
+  //     .style('stroke-width', 1);
+  //
+  // d3.select('svg')
+  //   .append('circle')
+  //     .attr('cx', 200)
+  //     .attr('cy', 200)
+  //     .attr('r', 40)
+  //     .style('fill', 'yellow')
+  //     .style('stroke', 'black')
+  //     .style('stroke-width', 1);
+
+  //SIMPLE BAR CHART USING SVG
+  // var myData = [100, 125, 320, 440, 500, 400, 456, 345, 50, 145, 234, 1000];
+  // myData.push(489);
+  var myData = new Array();
+  var dataCount = 50;
+
+  for (let i = 0; i < dataCount; i++) {
+    myData.push(Math.round(Math.random() * 1000))
+  }
+
+  myData.sort((a, b) => {
+    return a- b;
+  })
+
+  var margin = {
+    top: 30,
+    right: 40,
+    bottom: 40,
+    left: 50
+  }
+
+  var height = 500 - margin.top - margin.bottom;
+  var width = 500 - margin.right - margin.left;
+  var animateDuration = 1000;
+  var animateDelay = 40;
+  // var barWidth = 35;
+  // var barOffset = 5;
+
+  var tooltip = d3.select('body').append('div')
+    .style('position', 'absolute')
+    .style('background', '#f4f4f4')
+    .style('padding', '5px 15px')
+    .style('border', '1px solid #333')
+    .style('border-radius', '5px')
+    .style('opacity', '0')
+
+  var yScale = d3.scale.linear()
+    .domain([0, Math.max.apply(null, myData)])
+    .range([0, height])
+
+  var xScale = d3.scale.ordinal()
+    .domain(d3.range(0, myData.length))
+    .rangeBands([0, width]);
+
+  var colors = d3.scale.linear()
+    .domain([0, myData.length])
+    .range(['#90ee90', '#30c230'])
+
+  var myChart = d3.select('#chart')
+    .append('svg')
+      .attr('width', width + margin.right + margin.left)
+      .attr('height', height + margin.top + margin.bottom)
+      .append('g')
+      .attr('transform', `translate(${margin.left}, ${margin.top})`)
+      .style('background', '#f4f4f4')
+    .selectAll('rect')
+      .data(myData)
+      .enter()
+        .append('rect')
+          .style('fill', (data, index) => {
+            return colors(index);
+          })
+          .attr('width', xScale.rangeBand())
+          .attr('height', 0)
+          .attr('x', (d, index) => {
+            return xScale(index);
+          })
+          .attr('y', height)
+          .style('stroke', '#333')
+          .style('stroke-width', '2px')
+    .on('mouseover', function(data) {
+      tooltip.transition()
+        .style('opacity', 1)
+
+      tooltip.html(data)
+        .style('left', (d3.event.pageX) + "px")
+        .style('top', (d3.event.pageY) + 'px')
+      d3.select(this).style('opacity', 0.5);
+    })
+    .on('mouseout', function(data) {
+      tooltip.transition()
+        .style('opacity', 0);
+      d3.select(this).style('opacity', 1)
+    })
+
+    myChart.transition()
+      .attr('height', d => {
+        return yScale(d);
+      })
+      .attr('y', d => {
+        return height - yScale(d);
+      })
+      .duration(animateDuration)
+      .delay((d, i) => {
+        return i * animateDelay;
+      })
+      .ease('elastic')
+
+  var vScale = d3.scale.linear()
+    .domain([0, Math.max.apply(null, myData)])
+    .range([height, 0])
+
+  var hScale = d3.scale.ordinal()
+    .domain(d3.range(0, myData.length))
+    .rangeBands([0, width]);
+
+  var vAxis = d3.svg.axis()
+    .scale(vScale)
+    .orient('left')
+    .ticks(5)
+    .tickPadding(5)
+
+  // 'g' means, what will go next - will be put inside group(g)
+
+  var vGuide = d3.select('svg')
+    .append('g')
+      vAxis(vGuide)
+      vGuide.attr('transform', `translate(${margin.left}, ${margin.top})`)
+      vGuide.selectAll('path')
+        .style('fill', 'none')
+        .style('stroke', '#000')
+      vGuide.selectAll('line')
+        .style('stroke', '#000')
+
+
+    var hAxis = d3.svg.axis()
+      .scale(hScale)
+      .orient('bottom')
+      .tickValues(hScale.domain().filter((d, i) => {
+        return !(i % (myData.length / 5));
+      }));
+
+    var hGuide = d3.select('svg')
+      .append('g')
+        hAxis(hGuide)
+        hGuide.attr('transform', `translate(${margin.left}, ${height + margin.top})`)
+        hGuide.selectAll('path')
+          .style('fill', 'none')
+          .style('stroke', '#000')
+        hGuide.selectAll('line')
+          .style('stroke', '#000')
+  //   function handle(e) {
+  //     e.preventDefault();
+  //     console.log(e.target);
+  //     const text = e.target.children.text;
+  //     const pass = e.target.children.pass;
+  //     const validat = e.target.children.validat;
+  //     if (text.reportValidity() && pass.reportValidity() && validat.reportValidity() && pass.value === validat.value) {
+  //       console.log('passed!');
+  //     } else {
+  //       console.log('failed!');
+  //     }
+  //   }
+  // document.querySelector('form').addEventListener('submit', handle);
+  </script>
+</body>
+</html>

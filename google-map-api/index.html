@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    #map {
+      width: 100%;
+      height: 400px;
+    }
+  </style>
+  <title>Google Map API</title>
+</head>
+<body>
+  <h1>My Map</h1>
+  <div id="map"></div>
+  <script>
+    function initMap() {
+      var options = {
+        zoom: 12,
+        center: {lat:55.755898, lng:37.615801},
+      }
+      var map = new google.maps.Map(document.getElementById('map'), options);
+
+      // Version with just one hardcoded marker
+      // var marker = new google.maps.Marker({
+      //   position: {lat:55.754777, lng:37.619447},
+      //   map: map,
+      //   icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+      // })
+      // var infoWindow = new google.maps.InfoWindow({
+      //   content: "<h1>Red Square, Moscow</h1>"
+      // })
+      // marker.addListener('click', function(){
+      //   infoWindow.open(map, marker);
+      // })
+
+      google.maps.event.addListener(map, 'click', function(event){
+        addMarker({coords:event.latLng});
+      })
+
+      var markers = [
+        {
+          coords:{lat:55.754777, lng:37.619447},
+          iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+          content: '<h1>Red Square, Moscow</h1>',
+        },
+        {
+          coords:{lat:55.729167, lng:37.601243},
+          iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+          content: '<h1>Gorkiy Park, Moscow</h1>',
+        }
+      ]
+
+      for (let x = 0; x < markers.length; x++) {
+        addMarker(markers[x]);
+      }
+
+      function addMarker(props) {
+        var marker = new google.maps.Marker({
+          position: props.coords,
+          map: map,
+        })
+        if (props.iconImage)
+          marker.setIcon(props.iconImage);
+        if (props.content) {
+          var infoWindow = new google.maps.InfoWindow({
+          content: props.content,
+          })
+          marker.addListener('click', function(){
+            infoWindow.open(map, marker);
+          })
+        }
+      }
+    }
+  </script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJpSzecnY6hSejp_ECCKeh_AIclhsnwZk&callback=initMap">
+  </script>
+</body>
+</html>

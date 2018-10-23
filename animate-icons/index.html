@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css">
+  <title>Animate Icons</title>
+</head>
+<body>
+
+  <div id="chain" class="fa"></div>
+
+  <div id="battery" class="fa"></div>
+
+  <div id="hourglass" class="fa"></div>
+
+  <script type="text/javascript">
+  function breakChain() {
+  let chain = document.getElementById("chain");
+  chain.innerHTML = "&#xf0c1;";
+  setTimeout(function() {
+    chain.innerHTML = "&#xf127;";
+  }, 500);
+}
+
+breakChain();
+setInterval(breakChain, 1000);
+
+function chargeBattery() {
+  let battery = document.getElementById("battery");
+  battery.innerHTML = "&#xf244;";
+  setTimeout(() => {
+    battery.innerHTML = "&#xf243;";
+  }, 500);
+  setTimeout(() => {
+    battery.innerHTML = "&#xf242;";
+  }, 1000);
+  setTimeout(() => {
+    battery.innerHTML = "&#xf241;";
+  }, 1500);
+  setTimeout(() => {
+    battery.innerHTML = "&#xf240;";
+  }, 2000);
+}
+
+chargeBattery();
+setInterval(chargeBattery, 2500);
+
+function hourglassTip() {
+  let hourglass = document.getElementById("hourglass");
+  hourglass.innerHTML = "&#xf251;";
+  setTimeout(() => {
+    hourglass.innerHTML = "&#xf252;";
+  }, 500);
+  setTimeout(() => {
+    hourglass.innerHTML = "&#xf253;";
+  }, 1000);
+}
+
+hourglassTip();
+setInterval(hourglassTip, 1500);
+</script>
+</body>
+</html>
