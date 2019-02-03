@@ -1,0 +1,8 @@
+<% if (showSuccessView) { %>
+    <h2>Successfully added a new user!</h2>
+<% } else if (!showSuccessView && errors) { %>
+    <h2>Error!</h2>
+    <% errors.forEach(err => { %> 
+        <p><%= err.msg %></p>
+    <% }) %>
+<% } %>

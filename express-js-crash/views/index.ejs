@@ -1,0 +1,26 @@
+<% include partials/header %>
+<h1>HELLO from ejs</h1>
+<p><%= title %></p>
+<h3>add customer</h3>
+<% include response %>
+<form method="POST" action="/users/add">
+    <label>Name</label>
+    <input type="text" name="name" />
+    <br/>
+    <label>Age</label>
+    <input type="number" name="age" />
+    <br/>
+    <br/>
+    <button>Add</button>
+</form>
+<ul>
+    <% people.forEach(item => { %>
+        <li>
+            <span><%= item.name %></span>
+            <span><%= item.age %></span>
+            <span>&nbsp;</span>
+            <span><a href="#" class="delete-user" data-id="<%= item._id %>">Delete</a></span>
+        </li>
+    <% }) %>
+</ul>
+<% include partials/footer %>
