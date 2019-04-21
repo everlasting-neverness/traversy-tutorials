@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Shopping List</title>
+</head>
+<body>
+    
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo center">Shopping List</a>
+        </div>
+    </nav>
+    <ul></ul>
+
+    <script>
+        const electron = require('electron');
+        const { ipcRenderer } = electron;
+
+        const ul = document.querySelector('ul');
+        let items = getLocalStorageItems();
+
+        if (items) {
+            items.forEach(item => addItemsToList.call(null, null, item))
+        }
+
+        function getLocalStorageItems() {
+            if (typeof localStorage !== undefined) {
+                const items = localStorage.getItem('items');
+                return items && items.length !== 0 ? JSON.parse(items) : [];
+            }
+            return undefined;
+        }
+
+        // Catch add Item
+        ipcRenderer.on('item:add', addItemsToList);
+        ipcRenderer.on('item:add', addItemToLocalStorage);
+
+        // Catch clear all Items
+        ipcRenderer.on('item:clear', clearItemsList);
+        ipcRenderer.on('item:clear', clearLocalStorage);
+
+        // Add listener to ul for remove a single item
+        ul.addEventListener('dblclick', removeItem);
+
+        // Add items
+        function addItemsToList(e, item) {
+            if (item) {
+                ul.className = "collection";
+                const li = document.createElement('li');
+                li.className = "collection-item";
+                li.dataset.id = item.id;
+                const itemText = document.createTextNode(item.value);
+                li.appendChild(itemText);
+                ul.appendChild(li);
+            }
+        }
+
+        function addItemToLocalStorage(e, item) {
+            let items = getLocalStorageItems();
+            if (items) {
+                items.push(item)
+                localStorage.setItem('items', JSON.stringify(items));
+            }
+        }
+
+        // Remove individual item
+        function removeItem(e) {
+            e.target.remove()
+            if (!ul.children.length) {
+                ul.className = '';
+            }
+            removeItemFromLocalStorage(e.target.dataset.id);
+        }
+
+        function removeItemFromLocalStorage(id) {
+            let items = getLocalStorageItems();
+            if (items) {
+                const newItems = items.filter(item => item.id != id);
+                localStorage.setItem('items', JSON.stringify(newItems));
+            }
+        }
+
+        // Clear Items
+       
+        function clearItemsList(e) {
+            ul.innerHTML = '';
+            ul.className = '';
+        }
+
+        function clearLocalStorage(e) {
+            if (typeof localStorage !== undefined) {
+                localStorage.clear();
+            }
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "customers": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "email": "gwe@egaw.egw",
+      "age": 35
+    },
+    {
+      "id": "2",
+      "name": "ewgaweg",
+      "email": "gwe2@egaegawew.efgw",
+      "age": 27
+    },
+    {
+      "id": "3",
+      "name": "Sarah Williams",
+      "email": "11gwe@eggewaw.ru",
+      "age": 45
+    },
+    {
+      "id": "4",
+      "name": "Jane Doe",
+      "email": "gr@egaewrgaw.esdfgw",
+      "age": 23
+    }
+  ]
+}
